@@ -1,6 +1,7 @@
 package io.manasobi.view;
 
 import de.felixroske.jfxsupport.FXMLController;
+import io.manasobi.config.KafkaConfig;
 import io.manasobi.domain.PayloadTaskHandler;
 import io.manasobi.kafka.KafkaMessageProducer;
 import io.manasobi.view.log.LogbackLogAppender;
@@ -30,13 +31,17 @@ public class AppController {
     private Button execBtn;
 
     @FXML
-    private TextField zookeeperUrl;
+    private TextField kafkaBrokerUrl;
 
     @Autowired
     private KafkaMessageProducer producer;
 
     @Autowired
     private PayloadTaskHandler taskHandler;
+
+    private void setupKafkaConfig(TextField kafkaBrokerUrl) {
+        KafkaConfig.METADATA_BROKER_LIST = kafkaBrokerUrl.getText();
+    }
 
     public void handleExecuteButtonAction() {
 

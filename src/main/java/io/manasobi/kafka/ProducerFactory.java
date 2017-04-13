@@ -25,14 +25,11 @@ public class ProducerFactory {
         return producer;
     }
 
-
     private static String metadataBrokerList;
 
     @Value("${kafka.metadata.broker.list}")
     public void setMetadataBrokerList(String metadataBrokerList) {
         ProducerFactory.metadataBrokerList = metadataBrokerList;
-
-        System.out.println("broker list: " + metadataBrokerList);
     }
 
     private static KafkaProducer<String, JsonNode> buildProducer() {

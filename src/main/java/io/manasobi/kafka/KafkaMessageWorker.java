@@ -27,18 +27,18 @@ public class KafkaMessageWorker implements Runnable {
 
     private int size;
 
-    private String datesetDate = "2015-10-28";
+    private String dateTag;
 
     private int msgMaxRows;
 
     NumberFormat numberFormat = NumberFormat.getNumberInstance();
 
-    KafkaMessageWorker(String topic, int size, String datasetDir, int msgMaxRows) {
+    KafkaMessageWorker(String topic, int size, String dateTag, int msgMaxRows) {
 
         this.topic = topic;
         this.size = size;
 
-        this.datesetDate = datasetDir;
+        this.dateTag = dateTag;
         this.msgMaxRows = msgMaxRows;
 
         producer = ProducerFactory.getInstance();
@@ -49,7 +49,7 @@ public class KafkaMessageWorker implements Runnable {
 
         DataSetReader reader = new DataSetReader();
 
-        List<Point> messageList = reader.read(datesetDate, size);
+        List<Point> messageList = reader.read(dateTag, size);
 
 
         List<List<ProducerRecord<String, JsonNode>>> sendMsgList = Lists.newArrayList();

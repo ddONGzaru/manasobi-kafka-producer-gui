@@ -1,5 +1,6 @@
 package io.manasobi.domain;
 
+import io.manasobi.utils.RandomUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -16,26 +17,19 @@ public class PointPayloadBuilder implements PayloadBuilder<Point> {
     @Override
     public Point build() {
 
-        String uuid = UUID.randomUUID().toString();
+        String randomText = RandomUtils.getString(5);
 
         Point point = Point.builder()
                            .timestamp(System.currentTimeMillis())
                            .tagId("TAG-ID-")
                            .tagName("TAG-NAME-")
-                           /*.tagId("TAG-ID-" + uuid)
-                           .tagName("TAG-NAME-" + uuid)*/
+                           .tagId("TAG-ID-" + randomText)
+                           .tagName("TAG-NAME-" + randomText)
                            .type("TYPE-")
                            .value("VALUE-")
                            .siteId("SITE-ID-")
                            .opcId("OPC-ID-")
                            .groupName("GROUP-NAME-")
-/*
-                           .type("TYPE-" + uuid)
-                           .value("VALUE-" + uuid)
-                           .siteId("SITE-ID-" + uuid)
-                           .opcId("OPC-ID-" + uuid)
-                           .groupName("GROUP-NAME-" + uuid)
-*/
                            .quality(1)
                            .errorCode(9999)
                            .build();
