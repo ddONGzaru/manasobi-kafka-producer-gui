@@ -8,7 +8,7 @@ spring:
     enabled: false
 
 javafx:
-  title: kafka producer by manasobi
+  title: Kafka Producer ver.1.0.0
   stage:
     resizable: false
 

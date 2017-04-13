@@ -2,7 +2,7 @@ root {
     display: block;
 }
 .root {
-    -fx-background-image: url("background.png");
+    -fx-background-image: url("background.png2");
 }
 
 .label {
@@ -13,7 +13,7 @@ root {
 }
 
 #main-text {
-    -fx-font-size: 34px;
+    -fx-font-size: 24px;
     -fx-font-family: "Ubuntu Medium";
     -fx-fill: #818181;
     -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );

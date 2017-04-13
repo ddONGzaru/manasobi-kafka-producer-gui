@@ -19,7 +19,7 @@ public class Point {
 
 	private String  siteId;
 	private String  opcId;
-	private String  group_name;
+	private String  groupName;
 
 	private int    quality;
 	private int    errorCode;

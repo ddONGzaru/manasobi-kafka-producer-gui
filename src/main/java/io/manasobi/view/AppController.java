@@ -2,10 +2,13 @@ package io.manasobi.view;
 
 import de.felixroske.jfxsupport.FXMLController;
 import io.manasobi.kafka.KafkaMessageProducer;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.PostConstruct;
 
 /**
  * Created by tw.jang on 2017-04-13.
@@ -27,6 +30,10 @@ public class AppController {
 
     @FXML
     private Button execBtn;
+
+    @FXML
+    private TextField zookeeperUrl;
+
 
     @Autowired
     private KafkaMessageProducer producer;

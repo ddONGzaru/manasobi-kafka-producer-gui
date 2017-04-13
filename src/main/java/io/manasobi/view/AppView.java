@@ -6,6 +6,6 @@ import de.felixroske.jfxsupport.FXMLView;
 /**
  * Created by tw.jang on 2017-04-13.
  */
-@FXMLView
+@FXMLView(bundle = "io.manasobi.view.msg")
 public class AppView extends AbstractFxmlView {
 }
