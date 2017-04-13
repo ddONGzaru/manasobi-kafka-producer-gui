@@ -73,7 +73,7 @@ public class DataSetWriter {
 
         DataSetWriter dataSetWriter = new DataSetWriter();
 
-        dataSetWriter.write(Size._100_000.getSize());
+        dataSetWriter.write(Size._1_000_000.getSize());
 
     }
 

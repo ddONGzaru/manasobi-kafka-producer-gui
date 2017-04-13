@@ -4,12 +4,15 @@ import com.google.common.collect.Maps;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
 @Builder
-public class Point {
+public class Point implements Serializable {
+
+	private static final long serialVersionUID = -4158233963308977048L;
 
 	private long    timestamp;
 

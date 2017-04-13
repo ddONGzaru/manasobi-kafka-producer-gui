@@ -20,13 +20,22 @@ public class PointPayloadBuilder implements PayloadBuilder<Point> {
 
         Point point = Point.builder()
                            .timestamp(System.currentTimeMillis())
-                           .tagId("TAG-ID-" + uuid)
-                           .tagName("TAG-NAME-" + uuid)
+                           .tagId("TAG-ID-")
+                           .tagName("TAG-NAME-")
+                           /*.tagId("TAG-ID-" + uuid)
+                           .tagName("TAG-NAME-" + uuid)*/
+                           .type("TYPE-")
+                           .value("VALUE-")
+                           .siteId("SITE-ID-")
+                           .opcId("OPC-ID-")
+                           .groupName("GROUP-NAME-")
+/*
                            .type("TYPE-" + uuid)
                            .value("VALUE-" + uuid)
                            .siteId("SITE-ID-" + uuid)
                            .opcId("OPC-ID-" + uuid)
                            .groupName("GROUP-NAME-" + uuid)
+*/
                            .quality(1)
                            .errorCode(9999)
                            .build();
