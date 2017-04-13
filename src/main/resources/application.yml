@@ -1,0 +1,79 @@
+#debug: true
+
+#active profiles :: [dev|prod|stage|test]
+spring:
+  profiles:
+    active: dev
+  jmx:
+    enabled: false
+
+javafx:
+  title: kafka producer by manasobi
+  stage:
+    resizable: false
+
+#dataset
+dataset.dir: "2015-10-30"
+
+#kafka
+kafka:
+  metadata.broker.list: 192.168.0.100:32768,192.168.0.100:32769,192.168.0.100:32770
+  zookeeper:
+    url: 192.168.0.100:2181
+    session.timeout.ms: 4000
+    sync.timeout.ms: 200
+  auto.commit.interval.ms: 1000
+  group.id: anypoint.tv.group
+  topic:
+      log.collector: log.collector.test.0000
+      log.collector.thread.nums: 10
+  msg.max.rows: 5000
+
+#log-impresson
+log.impression:
+  csv.file.path: /tmp/csv/impresson-log/
+  table.name:
+    genre: ImpressionLogGenre
+    period: ImpressionLogPeriod
+    region: ImpressionLogRegion
+    campaign.genre: ImpressionLogCampaignGenre
+    campaign.period: ImpressionLogCampaignPeriod
+    campaign.region: ImpressionLogCampaignRegion
+
+#logging
+logging.config: classpath:logback.xml
+
+#datasource
+#datasource:
+#  driver-class-name: org.mariadb.jdbc.Driver
+#  username: root
+#  password: admin
+
+--- #profiles :: dev
+spring:
+  #profiles
+  profiles: dev
+
+#datasource
+#datasource:
+#  jdbc-url: jdbc:mysql://localhost:3307/kafka?characterEncoding=utf8&amp;useUnicode=true&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull
+
+--- #profiles :: test
+
+spring:
+  #profiles
+  profiles: test
+
+#datasource
+#datasource:
+#  jdbc-url: jdbc:mysql://localhost:3307/kafka?characterEncoding=utf8&amp;useUnicode=true&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull
+
+--- #profiles :: prod
+spring:
+  #profiles
+  profiles: prod
+
+#datasource
+#datasource:
+#  jdbc-url: jdbc:mysql://localhost:3307/kafka?characterEncoding=utf8&amp;useUnicode=true&amp;autoReconnect=true
+
