@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="460.0" prefWidth="585.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.manasobi.view.AppController">
 
-    <Text id="main-text" layoutX="31.0" layoutY="39.0" text="Kafka Producer" textAlignment="CENTER" />
+    <Text id="main-text" layoutX="31.0" layoutY="39.0" text="%label.main" textAlignment="CENTER" />
 
     <Button fx:id="execBtn" layoutX="525.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#handleExecuteButtonAction" onMouseEntered="#handleMouseEnteredAction" onMouseExited="#handleMouseExitAction" text="%text.exec.btn" />
 

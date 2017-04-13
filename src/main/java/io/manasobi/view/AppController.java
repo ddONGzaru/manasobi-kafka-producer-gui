@@ -42,10 +42,10 @@ public class AppController {
 
         LogbackLogAppender.setTextArea(console);
 
-        Alert startAlert = new Alert(Alert.AlertType.INFORMATION);
+        /*Alert startAlert = new Alert(Alert.AlertType.INFORMATION);
         startAlert.setTitle("Anypoint Kafka Producer ver-1.0.3");
         startAlert.setHeaderText("작업이 시작되었습니다.");
-        startAlert.showAndWait();
+        startAlert.showAndWait();*/
 
 
         log.info("작업이 시작되었습니다.");
