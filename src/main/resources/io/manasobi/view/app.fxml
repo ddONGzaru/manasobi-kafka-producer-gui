@@ -14,21 +14,36 @@
 <AnchorPane prefHeight="460.0" prefWidth="585.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.manasobi.view.AppController">
 
     <Text id="main-text" layoutX="31.0" layoutY="39.0" text="Kafka Producer" textAlignment="CENTER" />
+
+    <Button fx:id="execBtn" layoutX="525.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#handleExecuteButtonAction" onMouseEntered="#handleMouseEnteredAction" onMouseExited="#handleMouseExitAction" text="%text.exec.btn" />
+
     <Label layoutX="31.0" layoutY="65.0" text="%label.zookeepr.url" />
     <TextField fx:id="zookeeperUrl" layoutX="158.0" layoutY="61.0" prefHeight="22.0" prefWidth="417.0" text="%text.zookeepr.url" />
+
     <Label layoutX="31.0" layoutY="105.0" text="%label.kafka.broker.url" />
     <TextField fx:id="kafkaBrokerUrl" layoutX="158.0" layoutY="101.0" prefHeight="22.0" prefWidth="417.0" text="%text.kafka.broker.url" />
+
     <Label layoutX="31.0" layoutY="145.0" text="%label.message.size" />
-    <ChoiceBox layoutX="158.0" layoutY="141.0" prefWidth="150.0" value="1,000,000">
+    <ChoiceBox fx:id="size" layoutX="158.0" layoutY="141.0" prefWidth="150.0" value="1,000,000">
         <items>
             <FXCollections fx:factory="observableArrayList">
+                <String fx:value="100,000" />
+                <String fx:value="300,000" />
+                <String fx:value="500,000" />
                 <String fx:value="1,000,000" />
                 <String fx:value="3,000,000" />
+                <String fx:value="5,000,000" />
             </FXCollections>
         </items>
     </ChoiceBox>
-   <Button layoutX="509.0" layoutY="141.0" mnemonicParsing="false" text="Button" />
-   <Separator layoutX="15.0" layoutY="178.0" prefHeight="6.0" prefWidth="564.0" />
-   <TextArea layoutX="15.0" layoutY="197.0" prefHeight="250.0" prefWidth="564.0" />
+
+    <Label layoutX="346.0" layoutY="145.0" text="%label.dataset.date" />
+    <TextField fx:id="datasetDate" layoutX="438.0" layoutY="141.0" prefHeight="22.0" prefWidth="137.0" text="%text.dataset.date" />
+
+
+    <Separator layoutX="15.0" layoutY="178.0" prefHeight="6.0" prefWidth="564.0" />
+
+    <TextArea fx:id="processStatsDesc" layoutX="15.0" layoutY="197.0" prefHeight="250.0" prefWidth="564.0" />
+
 
 </AnchorPane>

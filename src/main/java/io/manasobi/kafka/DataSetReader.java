@@ -17,20 +17,18 @@ import java.util.List;
 @Slf4j
 public class DataSetReader {
 
-    public List<Point> read(String datasetDir, int page, int size) {
+    public List<Point> read(String datasetDate, int size) {
 
         String fileDir;
         String userDir = System.getProperty("user.dir");
 
-        if (FileUtils.existsDir(userDir + "/src/main/resources/config/dataset/")) {
-            fileDir = userDir + "/src/main/resources/config/dataset/" + datasetDir + "/";
+        if (FileUtils.existsDir(userDir + "/src/main/resources/dataset/")) {
+            fileDir = userDir + "/src/main/resources/dataset/";
         } else {
-            fileDir = userDir + "/config/dataset/" + datasetDir + "/";
+            fileDir = userDir + "/config/dataset/";
         }
 
-        String datasetPrefix = datasetDir.replaceAll("-", "");
-
-        String fileName = datasetPrefix + "_impression-log_offset_" + String.format("%06d", page) + "_size_" + String.format("%06d", size) + ".jdo";
+        String fileName = datasetDate + "_point-dataset_size_" + String.format("%06d", size) + ".jdo";
 
         List<Point> objList = null;
 
@@ -50,23 +48,6 @@ public class DataSetReader {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-
-
-
-        /*try(FileInputStream fis = new FileInputStream(fileDir + fileName);
-            ByteBufferInput input = new ByteBufferInput(fis)) {
-
-            Kryo kryo = new Kryo();
-
-            KryoObjectInput objectInput = new KryoObjectInput(kryo, input);
-
-            objList = (List<ImpressionLog>) objectInput.readObject();
-
-        } catch(Exception e) {
-
-            log.error(e.getMessage());
-            return null;
-        }*/
 
         return objList;
     }

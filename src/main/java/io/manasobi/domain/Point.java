@@ -1,12 +1,14 @@
 package io.manasobi.domain;
 
 import com.google.common.collect.Maps;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
+@Builder
 public class Point {
 
 	private long    timestamp;

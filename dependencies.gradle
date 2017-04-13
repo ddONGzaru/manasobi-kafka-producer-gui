@@ -19,6 +19,8 @@ dependencies {
     // kafka
     compile 'com.101tec:zkclient:0.10'
 
+    compile 'com.esotericsoftware:kryo:4.0.0'
+
     //etc
     compile 'com.google.guava:guava:17.0'
     compile 'joda-time:joda-time:2.3'
