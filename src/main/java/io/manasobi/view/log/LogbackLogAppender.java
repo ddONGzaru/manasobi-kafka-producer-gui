@@ -1,13 +1,14 @@
-package io.manasobi.utils;
+package io.manasobi.view.log;
 
 import ch.qos.logback.core.AppenderBase;
+import io.manasobi.utils.DateUtils;
 import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 
 /**
  * Created by Administrator on 2015-11-03.
  */
-public class LogbackLogAppender  extends AppenderBase<Object> {
+public class LogbackLogAppender extends AppenderBase<Object> {
 
     private static volatile TextArea textArea = null;
 
@@ -22,7 +23,7 @@ public class LogbackLogAppender  extends AppenderBase<Object> {
         String timestamp = DateUtils.getCurrentTimestampAsString();
         timestamp = timestamp.length() == 22 ? timestamp + "0" : timestamp;
 
-        final String message =  timestamp + eventObject.toString() + "\n";
+        final String message =  timestamp + " " + eventObject.toString() + "\n";
 
         // Append formatted message to text area using the Thread.
         try {

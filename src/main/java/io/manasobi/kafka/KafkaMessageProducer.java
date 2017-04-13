@@ -26,13 +26,9 @@ public class KafkaMessageProducer {
     @Value("${dataset.dir}")
     private String datasetDir;
 
-    public void process(TextArea console, int page, int size, boolean enableTruncateTableJob) {
+    public void process(TextArea console, int size) {
 
         console.clear();
-
-        if (enableTruncateTableJob) {
-            //TestResultReporter.truncateTables(jdbcTemplate.getDataSource());
-        }
 
         log.debug("===================================");
         log.debug("Application :: Start..." );
@@ -53,7 +49,7 @@ public class KafkaMessageProducer {
 
         for (int i = 0; i < producerThreadNums; i++) {
 
-            Runnable worker = new KafkaMessageWorker(topic, page + i, size, page == 1, datasetDir, msgMaxRows);
+            Runnable worker = new KafkaMessageWorker(topic, size, datasetDir, msgMaxRows);
 
             executor.execute(worker);
         }

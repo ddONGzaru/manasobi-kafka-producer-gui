@@ -43,7 +43,7 @@
 
     <Separator layoutX="15.0" layoutY="178.0" prefHeight="6.0" prefWidth="564.0" />
 
-    <TextArea fx:id="processStatsDesc" layoutX="15.0" layoutY="197.0" prefHeight="250.0" prefWidth="564.0" />
+    <TextArea fx:id="console" layoutX="15.0" layoutY="197.0" prefHeight="250.0" prefWidth="564.0" />
 
 
 </AnchorPane>

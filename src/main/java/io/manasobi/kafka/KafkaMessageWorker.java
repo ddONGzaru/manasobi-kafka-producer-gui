@@ -25,8 +25,6 @@ public class KafkaMessageWorker implements Runnable {
 
     private KafkaProducer<String, JsonNode> producer;
 
-    private int page;
-
     private int size;
 
     private String datesetDate = "2015-10-28";
@@ -35,11 +33,9 @@ public class KafkaMessageWorker implements Runnable {
 
     NumberFormat numberFormat = NumberFormat.getNumberInstance();
 
-    KafkaMessageWorker(String topic, int page, int size, boolean decreaseIndex, String datasetDir, int msgMaxRows) {
+    KafkaMessageWorker(String topic, int size, String datasetDir, int msgMaxRows) {
 
         this.topic = topic;
-
-        this.page = (decreaseIndex) ? --page * size : page * size;
         this.size = size;
 
         this.datesetDate = datasetDir;
