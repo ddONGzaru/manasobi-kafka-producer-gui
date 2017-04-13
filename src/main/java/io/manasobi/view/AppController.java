@@ -51,6 +51,8 @@ public class AppController {
 
         processStatsDesc.setText("전송할 메시지를 생성합니다...");
 
+
+
         int totalSize = Integer.valueOf(size.getSelectionModel().getSelectedItem().toString().replaceAll(",", ""));
 
         taskHandler.process(totalSize);

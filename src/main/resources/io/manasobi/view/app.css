@@ -1,8 +1,8 @@
-root {
+/*root {
     display: block;
-}
+}*/
 .root {
-    -fx-background-image: url("background.png2");
+    -fx-background-image: url("background.png");
 }
 
 .label {
