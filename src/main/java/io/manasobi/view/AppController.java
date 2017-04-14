@@ -36,6 +36,9 @@ public class AppController {
     @FXML
     private TextField datasetDateTag;
 
+    @FXML
+    private TextField topic;
+
     @Autowired
     private KafkaMessageProducer producer;
 
@@ -49,6 +52,8 @@ public class AppController {
         KafkaConfig.MSG_TOTAL_SIZE = Integer.valueOf(msgTotalSize.getSelectionModel().getSelectedItem().toString().replaceAll(",", ""));
 
         KafkaConfig.DATASET_DATE_TAG = datasetDateTag.getText();
+
+        KafkaConfig.TOPIC = topic.getText();
     }
 
     public void handleExecuteButtonAction() {
