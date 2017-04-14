@@ -4,6 +4,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
+import io.manasobi.config.KafkaConfig;
 import io.manasobi.domain.Point;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -21,26 +22,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public class KafkaMessageWorker implements Runnable {
 
-    private String topic;
-
     private KafkaProducer<String, JsonNode> producer;
-
-    private int size;
-
-    private String dateTag;
-
-    private int msgMaxRows;
 
     NumberFormat numberFormat = NumberFormat.getNumberInstance();
 
-    KafkaMessageWorker(String topic, int size, String dateTag, int msgMaxRows) {
-
-        this.topic = topic;
-        this.size = size;
-
-        this.dateTag = dateTag;
-        this.msgMaxRows = msgMaxRows;
-
+    KafkaMessageWorker() {
         producer = ProducerFactory.getInstance();
     }
 
@@ -49,7 +35,7 @@ public class KafkaMessageWorker implements Runnable {
 
         DataSetReader reader = new DataSetReader();
 
-        List<Point> messageList = reader.read(dateTag, size);
+        List<Point> messageList = reader.read(KafkaConfig.DATASET_DATE_TAG, KafkaConfig.MSG_TOTAL_SIZE);
 
 
         List<List<ProducerRecord<String, JsonNode>>> sendMsgList = Lists.newArrayList();
@@ -65,9 +51,9 @@ public class KafkaMessageWorker implements Runnable {
 
             JsonNode jsonNode = objectMapper.convertValue(message, JsonNode.class);
 
-            sendMsgUnitList.add(new ProducerRecord<String, JsonNode>(topic, generateKey(), jsonNode));
+            sendMsgUnitList.add(new ProducerRecord<String, JsonNode>(KafkaConfig.TOPIC, generateKey(), jsonNode));
 
-            if (index % msgMaxRows == 0) {
+            if (index % KafkaConfig.MSG_MAX_ROWS == 0) {
 
                 sendMsgList.add(sendMsgUnitList);
                 sendMsgUnitList = Lists.newArrayList();

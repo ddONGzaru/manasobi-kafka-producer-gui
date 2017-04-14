@@ -22,7 +22,7 @@ import java.io.OutputStream;
 public class AppController {
 
     @FXML
-    private ChoiceBox size;
+    private ChoiceBox msgTotalSize;
 
     @FXML
     private TextArea console;
@@ -33,19 +33,29 @@ public class AppController {
     @FXML
     private TextField kafkaBrokerUrl;
 
+    @FXML
+    private TextField datasetDateTag;
+
     @Autowired
     private KafkaMessageProducer producer;
 
     @Autowired
     private PayloadTaskHandler taskHandler;
 
-    private void setupKafkaConfig(TextField kafkaBrokerUrl) {
+    private void setupKafkaConfig() {
+
         KafkaConfig.METADATA_BROKER_LIST = kafkaBrokerUrl.getText();
+
+        KafkaConfig.MSG_TOTAL_SIZE = Integer.valueOf(msgTotalSize.getSelectionModel().getSelectedItem().toString().replaceAll(",", ""));
+
+        KafkaConfig.DATASET_DATE_TAG = datasetDateTag.getText();
     }
 
     public void handleExecuteButtonAction() {
 
         LogbackLogAppender.setTextArea(console);
+
+        setupKafkaConfig();
 
         /*Alert startAlert = new Alert(Alert.AlertType.INFORMATION);
         startAlert.setTitle("Anypoint Kafka Producer ver-1.0.3");
@@ -55,10 +65,9 @@ public class AppController {
 
         log.info("작업이 시작되었습니다.");
 
-        int sizeParam = Integer.valueOf(size.getSelectionModel().getSelectedItem().toString().replaceAll(",", ""));
-        sizeParam = sizeParam / 10;
 
-        producer.process(console, sizeParam);
+
+        producer.process(console);
 
         /*console.getParent().getScene().setCursor(Cursor.WAIT);
         Platform.runLater(() -> console.getParent().getScene().setCursor(Cursor.WAIT));*/

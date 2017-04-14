@@ -1,8 +1,12 @@
 package io.manasobi.config;
 
 import io.manasobi.domain.Point;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.core.task.support.TaskExecutorAdapter;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -31,6 +35,19 @@ public class AppConfig {
         taskExecutor.setQueueCapacity(30);
 
         return taskExecutor;
+    }
+
+    @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public MessageSource messageSource() {
+
+        ReloadableResourceBundleMessageSource resourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
+
+        resourceBundleMessageSource.setBasename("classpath:io/manasobi/view/messages");
+        resourceBundleMessageSource.setDefaultEncoding("UTF-8");
+        resourceBundleMessageSource.setFallbackToSystemLocale(true);
+
+        return resourceBundleMessageSource;
     }
 
 

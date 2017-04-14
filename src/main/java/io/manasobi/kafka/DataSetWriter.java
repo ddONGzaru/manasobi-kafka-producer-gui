@@ -1,23 +1,27 @@
 package io.manasobi.kafka;
 
 import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.io.ByteBufferOutput;
+import com.esotericsoftware.kryo.io.KryoObjectOutput;
 import com.esotericsoftware.kryo.io.Output;
-import io.manasobi.domain.PayloadBuilder;
 import io.manasobi.domain.PayloadWorker;
 import io.manasobi.domain.Point;
 import io.manasobi.domain.PointPayloadBuilder;
 import io.manasobi.utils.DateUtils;
 import io.manasobi.utils.FileUtils;
-import lombok.Cleanup;
+import io.manasobi.utils.UTF8Serializer;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 /**
  * Created by tw.jang on 2017-04-13.
  */
+@Slf4j
 public class DataSetWriter {
 
     public void write(int size) {
@@ -31,13 +35,16 @@ public class DataSetWriter {
 
         Kryo kryo = new Kryo();
 
-        Output output;
+        try(FileOutputStream fos = new FileOutputStream(buildDataSetName(size));
+            ByteBufferOutput output = new ByteBufferOutput(fos)) {
 
-        try {
-            output = new Output(new FileOutputStream(buildDataSetName(size)));
-            kryo.writeObject(output, pointList);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            KryoObjectOutput objectOutput = new KryoObjectOutput(kryo, output);
+
+            objectOutput.writeObject(pointList);
+
+        } catch(IOException e) {
+
+            log.error(e.getMessage());
         }
     }
 
@@ -52,7 +59,7 @@ public class DataSetWriter {
 
         String namePrefix = DateUtils.getCurrentDateAsString("yyyyMMdd");
 
-        String name = namePrefix + "_point-dataset_size_" + String.format("%07d", size) + ".jdo";
+        String name = namePrefix + "_point-msg_size_" + String.format("%07d", size) + ".jdo";
 
         return dir + name;
     }
@@ -73,7 +80,7 @@ public class DataSetWriter {
 
         DataSetWriter dataSetWriter = new DataSetWriter();
 
-        dataSetWriter.write(Size._1_000_000.getSize());
+        dataSetWriter.write(Size._100_000.getSize());
 
     }
 

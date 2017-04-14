@@ -1,5 +1,6 @@
 package io.manasobi.kafka;
 
+import io.manasobi.config.KafkaConfig;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import lombok.extern.slf4j.Slf4j;
@@ -17,22 +18,13 @@ import java.util.concurrent.Executors;
 @Component
 public class KafkaMessageProducer {
 
-    @Value("${kafka.topic.log.collector}")
-    private String topic;
-
-    @Value("${kafka.msg.max.rows}")
-    private int msgMaxRows;
-
-    @Value("${dataset.dir}")
-    private String datasetDir;
-
-    public void process(TextArea console, int size) {
+    public void process(TextArea console) {
 
         console.clear();
 
         log.debug("===================================");
         log.debug("Application :: Start..." );
-        log.debug("Kafka Producer :: Topic -> " + topic);
+        log.debug("Kafka Producer :: Topic -> " + KafkaConfig.TOPIC);
 
 
         StopWatch stopWatch = new StopWatch();
@@ -42,14 +34,9 @@ public class KafkaMessageProducer {
 
         int producerThreadNums = 10;
 
-        if (size == 300000) {
-            producerThreadNums = 30;
-            size = 100000;
-        }
-
         for (int i = 0; i < producerThreadNums; i++) {
 
-            Runnable worker = new KafkaMessageWorker(topic, size, datasetDir, msgMaxRows);
+            Runnable worker = new KafkaMessageWorker();
 
             executor.execute(worker);
         }
